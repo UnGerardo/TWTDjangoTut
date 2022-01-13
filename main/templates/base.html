@@ -7,6 +7,10 @@
         <title>Base Page</title>
     </head>
     <body>
-        <p>Base Template</p>
+        <div id="content" name="content">
+            {% block content %}
+                <p>{{name}}</p>
+            {% endblock %}
+        </div>
     </body>
 </html>

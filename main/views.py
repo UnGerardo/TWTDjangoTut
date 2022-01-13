@@ -8,7 +8,7 @@ def landingPage(request, id):
     #     return HttpResponse(f"<h1>{ToDoList.objects.get(id=1).item_set.get(id=id)}</h1>")
     # except:
     #     return HttpResponse(f"<h1>An item with id: {id} doesn't exist.</h1>")
-    return render(request, 'base.html', {})
+    return render(request, 'base.html', {'name': ToDoList.objects.get(id=id)})
 
 def home(request):
     return render(request, 'home.html', {})
