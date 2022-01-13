@@ -4,11 +4,8 @@ from .models import ToDoList, Item
 
 # Create your views here.
 def landingPage(request, id):
-    # try:
-    #     return HttpResponse(f"<h1>{ToDoList.objects.get(id=1).item_set.get(id=id)}</h1>")
-    # except:
-    #     return HttpResponse(f"<h1>An item with id: {id} doesn't exist.</h1>")
-    return render(request, 'base.html', {'name': ToDoList.objects.get(id=id)})
+    currentList = ToDoList.objects.get(id=id)
+    return render(request, 'list.html', {'currentList': currentList})
 
 def home(request):
     return render(request, 'home.html', {})
