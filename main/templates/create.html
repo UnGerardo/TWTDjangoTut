@@ -7,7 +7,7 @@
 {% block content %}
     <h1>Create Page</h1>
     <form method="post" action="/create/">
-        <!-- needs to be placed before each form -->
+        <!-- needs to be placed after each form tag -->
         {% csrf_token %}
         {{form}}
         <button type="submit" name="save">Create New</button>
