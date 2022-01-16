@@ -5,11 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Create List</h1>
-    <form method="post" action="/create/">
+    <h3>Create List</h3>
+    <form method="post" action="/create/" class="form-group">
         <!-- needs to be placed after each form tag -->
         {% csrf_token %}
-        {{form}}
-        <button type="submit" name="save">Create New</button>
+        <div class="input-group mb-3">
+            <!-- can separate out form fields -->
+            {{form.name}}
+            <div class="input-group-prepend">
+                <button type="submit" name="save" class="btn btn-success">Create New</button>
+            </div>
+        </div>
     </form>
 {% endblock %}
