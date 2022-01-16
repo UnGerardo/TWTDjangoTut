@@ -9,12 +9,14 @@ def list(request, id):
     currentList = ToDoList.objects.get(id=id)
 
     #request.POST has all the info of the form
+    #NEED TO RESEARCH BUG WHERE REFRESH CAUSES POST REQUEST TO BE DUPLICATED CREATING DUPLICATE ITEMS
     if request.method == "POST":
         print(request.POST)
         #choose a specific button, will have no value or the value defined in the value attribute
         if request.POST.get("save"):
             for item in currentList.item_set.all():
                 #I think this works because unchecked checkboxes don't get sent in the POST request and aren't seen, the ones that checked are tied to the value 'clicked'
+                #right so only filled out fields are included in the POST request
                 if request.POST.get(f"c{item.id}") == "clicked":
                     item.complete = True
                 else:
