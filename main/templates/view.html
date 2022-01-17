@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}
+View
+{% endblock %}
+
+{% block content %}
+    <!-- BUG where user with no lists gets a 500 error when in view.html -->
+    {% for tdl in user.todolist.all %}
+        <p><a href="/{{tdl.id}}">{{tdl.name}}</a></p>
+    {% endfor %}
+{% endblock %}

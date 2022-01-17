@@ -4,9 +4,12 @@
     Create and Account
 {% endblock %}
 
+{% block authenticationCheck %}
+{% endblock %}
+
 {% load crispy_forms_tags %}
 
-{% block content %}
+{% block login_register %}
     <form method="post" class="form-group">
         {% csrf_token %}
         {{form|crispy}}

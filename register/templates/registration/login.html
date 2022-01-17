@@ -9,7 +9,7 @@ Login Here
 
 {% load crispy_forms_tags %}
 
-{% block login %}
+{% block login_register %}
 <form class="form-group" method="post">
     {% csrf_token %}
     {{form|crispy}}

@@ -1,3 +1,4 @@
+from unicodedata import name
 from urllib import response
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -7,6 +8,10 @@ from .forms import CreateNewList
 # Create your views here.
 def list(request, id):
     currentList = ToDoList.objects.get(id=id)
+
+    #if user tries to view list that isn't theirs
+    if not currentList in request.user.todolist.all():
+        return render(request, 'view.html', {})
 
     #request.POST has all the info of the form
     #NEED TO RESEARCH BUG WHERE REFRESH CAUSES POST REQUEST TO BE DUPLICATED CREATING DUPLICATE ITEMS
@@ -39,19 +44,28 @@ def home(request):
 def create(request):
     #get user info with request.user
 
+    print("create")
     #when form is submitted
     if request.method == "POST":
         #takes the form input from the request and creates an object containing the data fields
+        print("post in create")
         form = CreateNewList(request.POST)
+        print(form)
+        print(f"form is valid: {form.is_valid()}")
         if form.is_valid():
             n = form.cleaned_data["name"]
             t = ToDoList(name=n)
             t.save()
+            request.user.todolist.add(t)
+            print('yup')
         
-        #redirects to new table
-        return HttpResponseRedirect(f"/{t.id}")
+            #redirects to new table
+            return HttpResponseRedirect(f"/{t.id}")
     
     #when form page is accessed
     else:
         form = CreateNewList()
     return render(request, 'create.html', {"form": form})
+
+def view(request):
+    return render(request, "view.html", {})
