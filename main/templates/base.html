@@ -53,7 +53,17 @@
                 <div class="col-8">
                     <h1 class="mt-2">My Site</h1>
                     <hr class="mt-0 mb-4">
-                    {% block content %}
+                    <!-- display only if user is logged in -->
+                    {% block authenticationCheck %}
+                        {% if user.is_authenticated %}
+                            {% block content %}
+                            {% endblock %}
+                        {% else %}
+                            <a href="/login/">Login Here</a>
+                        {% endif %}
+                    {% endblock %}
+
+                    {% block login %}
                     {% endblock %}
                 </div>
             </div>

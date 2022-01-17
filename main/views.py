@@ -37,6 +37,8 @@ def home(request):
     return render(request, 'home.html', {})
 
 def create(request):
+    #get user info with request.user
+
     #when form is submitted
     if request.method == "POST":
         #takes the form input from the request and creates an object containing the data fields
